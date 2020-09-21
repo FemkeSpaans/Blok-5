@@ -1,13 +1,17 @@
 package Afvink3;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TicTacToe extends JFrame implements ActionListener {
 
     int alternate = 0;
+    JButton buttons[] = new JButton[9];
 
 
 
@@ -18,6 +22,11 @@ public class TicTacToe extends JFrame implements ActionListener {
 
 
     public void checkWinner(){
+        int [][] list = new int[3][3];
+        // check rows
+        //List topRow = Arrays.asList(1,2,3);
+        // check columns
+        // check diagonal
 
 
     }
@@ -44,35 +53,12 @@ public class TicTacToe extends JFrame implements ActionListener {
         Container window = getContentPane();
         window.setLayout(new GridLayout(3,3));
 
-        JButton buttonOne = new JButton();
-        JButton buttonTwo = new JButton();
-        JButton buttonThree = new JButton();
-        JButton buttonFour = new JButton();
-        JButton buttonFive = new JButton();
-        JButton buttonSix = new JButton();
-        JButton buttonSeven = new JButton();
-        JButton buttonEight = new JButton();
-        JButton buttonNine = new JButton();
+        for(int i = 0; i < 9; i++) {
+            window.add(new JButton());
+            buttons[i].setText("");
+            buttons[i].addActionListener(this); 
 
-        window.add(buttonOne);
-        window.add(buttonTwo);
-        window.add(buttonThree);
-        window.add(buttonFour);
-        window.add(buttonFive);
-        window.add(buttonSix);
-        window.add(buttonSeven);
-        window.add(buttonEight);
-        window.add(buttonNine);
-
-        buttonOne.addActionListener(this);
-        buttonTwo.addActionListener(this);
-        buttonThree.addActionListener(this);
-        buttonFour.addActionListener(this);
-        buttonFive.addActionListener(this);
-        buttonSix.addActionListener(this);
-        buttonSeven.addActionListener(this);
-        buttonEight.addActionListener(this);
-        buttonNine.addActionListener(this);
+        }
 
 
     }
@@ -85,7 +71,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         else
             buttonClicked.setText("O");
 
-        alternate ++; 
+        alternate ++;
 
     }
 }
