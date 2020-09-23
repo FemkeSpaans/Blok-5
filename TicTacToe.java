@@ -38,8 +38,9 @@ public class TicTacToe extends JFrame implements ActionListener {
         frame.add(titlePanel,BorderLayout.NORTH);
         frame.add(buttonPanel);
         frame.createButtons(); // calls to a different method called createGUI
-        frame.setVisible(true); // makes frame visible
         frame.turn();
+        frame.setVisible(true); // makes frame visible
+
     }
 
     /*
@@ -49,7 +50,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         buttonPanel.setLayout(new GridLayout(3,3));
         for(int i = 0; i < 9; i++) { // for loop to create 9 new buttons
             buttons[i] = new JButton();
-            buttons[i].setFont(new Font("MV Boli",Font.BOLD, 80));
+            buttons[i].setFont(new Font("Dialog",Font.BOLD, 80));
             buttons[i].setBackground(Color.GRAY);
             buttons[i].setText("");
             buttons[i].addActionListener(this);
@@ -79,121 +80,121 @@ public class TicTacToe extends JFrame implements ActionListener {
     public void checkWinner(){
         // check X win conditions
         if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[1].getText()=="X") &&
-                        (buttons[2].getText()=="X") // check first row from X
+                (buttons[0].getText().equals("X")) &&
+                        (buttons[1].getText().equals("X")) &&
+                        (buttons[2].getText().equals("X")) // check first row from X
         ) {
             xWins(0,1,2);
         }
         if(
-                (buttons[3].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[5].getText()=="X") // check second row from X
+                (buttons[3].getText().equals("X")) &&
+                        (buttons[4].getText().equals("X")) &&
+                        (buttons[5].getText().equals("X")) // check second row from X
         ) {
             xWins(3,4,5);
         }
         if(
-                (buttons[6].getText()=="X") &&
-                        (buttons[7].getText()=="X") &&
-                        (buttons[8].getText()=="X") // check third row from X
+                (buttons[6].getText().equals("X")) &&
+                        (buttons[7].getText().equals("X")) &&
+                        (buttons[8].getText().equals("X")) // check third row from X
         ) {
             xWins(6,7,8);
         }
         if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[3].getText()=="X") &&
-                        (buttons[6].getText()=="X") // check first column from X
+                (buttons[0].getText().equals("X")) &&
+                        (buttons[3].getText().equals("X")) &&
+                        (buttons[6].getText().equals("X")) // check first column from X
         ) {
             xWins(0,3,6);
         }
         if(
-                (buttons[1].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[7].getText()=="X") // check second column from X
+                (buttons[1].getText().equals("X")) &&
+                        (buttons[4].getText().equals("X")) &&
+                        (buttons[7].getText().equals("X")) // check second column from X
         ) {
             xWins(1,4,7);
         }
         if(
-                (buttons[2].getText()=="X") &&
-                        (buttons[5].getText()=="X") &&
-                        (buttons[8].getText()=="X") // check third column from X
+                (buttons[2].getText().equals("X")) &&
+                        (buttons[5].getText().equals("X")) &&
+                        (buttons[8].getText().equals("X")) // check third column from X
         ) {
             xWins(2,5,8);
         }
         if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[8].getText()=="X") // check diagonal 1 from X
+                (buttons[0].getText().equals("X")) &&
+                        (buttons[4].getText().equals("X")) &&
+                        (buttons[8].getText().equals("X")) // check diagonal 1 from X
         ) {
             xWins(0,4,8);
         }
         if(
-                (buttons[2].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[6].getText()=="X") //check diagonal 2 from X
+                (buttons[2].getText().equals("X")) &&
+                        (buttons[4].getText().equals("X")) &&
+                        (buttons[6].getText().equals("X")) //check diagonal 2 from X
         ) {
             xWins(2,4,6);
         }
 
         //check O win conditions
         if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[1].getText()=="O") &&
-                        (buttons[2].getText()=="O") // check first row from O
+                (buttons[0].getText().equals("O")) &&
+                        (buttons[1].getText().equals("O")) &&
+                        (buttons[2].getText().equals("O")) // check first row from O
         ) {
             oWins(0,1,2);
         }
         if(
-                (buttons[3].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[5].getText()=="O") // check second row from O
+                (buttons[3].getText().equals("O")) &&
+                        (buttons[4].getText().equals("O")) &&
+                        (buttons[5].getText().equals("O")) // check second row from O
         ) {
             oWins(3,4,5);
         }
         if(
-                (buttons[6].getText()=="O") &&
-                        (buttons[7].getText()=="O") &&
-                        (buttons[8].getText()=="O") // check third row from O
+                (buttons[6].getText().equals("O")) &&
+                        (buttons[7].getText().equals("O")) &&
+                        (buttons[8].getText().equals("O")) // check third row from O
         ) {
             oWins(6,7,8);
         }
         if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[3].getText()=="O") &&
-                        (buttons[6].getText()=="O") // check first column from O
+                (buttons[0].getText().equals("O")) &&
+                        (buttons[3].getText().equals("O")) &&
+                        (buttons[6].getText().equals("O")) // check first column from O
         ) {
             oWins(0,3,6);
         }
         if(
-                (buttons[1].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[7].getText()=="O") // check second column from O
+                (buttons[1].getText().equals("O")) &&
+                        (buttons[4].getText().equals("O")) &&
+                        (buttons[7].getText().equals("O")) // check second column from O
         ) {
             oWins(1,4,7);
         }
         if(
-                (buttons[2].getText()=="O") &&
-                        (buttons[5].getText()=="O") &&
-                        (buttons[8].getText()=="O") // check third column from O
+                (buttons[2].getText().equals("O")) &&
+                        (buttons[5].getText().equals("O")) &&
+                        (buttons[8].getText().equals("O")) // check third column from O
         ) {
             oWins(2,5,8);
         }
         if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[8].getText()=="O") // check diagonal 1 from O
+                (buttons[0].getText().equals("O")) &&
+                        (buttons[4].getText().equals("O")) &&
+                        (buttons[8].getText().equals("O")) // check diagonal 1 from O
         ) {
             oWins(0,4,8);
         }
         if(
-                (buttons[2].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[6].getText()=="O") // check diagonal 2 from O
+                (buttons[2].getText().equals("O")) &&
+                        (buttons[4].getText().equals("O")) &&
+                        (buttons[6].getText().equals("O")) // check diagonal 2 from O
         ) {
             oWins(2,4,6);
         }
-        for(int i=0;i<9;i++){
-            if(buttons[i].getText()!="");
+        for(int i=0;i>9;i++){
+            if(buttons[i].getText().equals(""));
             draw();
         }
     }
@@ -229,7 +230,7 @@ public class TicTacToe extends JFrame implements ActionListener {
                         checkWinner();
                     }
                 }
-                else if(buttons[i].getText()=="") {
+                else if(buttons[i].getText().equals("")) {
                         buttons[i].setText("O");
                         player1=true;
                         checkWinner();
