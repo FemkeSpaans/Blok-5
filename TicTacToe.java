@@ -26,12 +26,15 @@ public class TicTacToe extends JFrame implements ActionListener {
         frame.setTitle("Tic Tac Toe"); // give title
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // close frame when closing
         frame.setSize(500, 500); // sets size of the frame
-        frame.setResizable(false);// frame cannot be made any bigger or smaller than it is
         frame.getContentPane();
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout());// give frame a border layout
+        frame.setVisible(true); // makes frame visible
+        frame.setResizable(false);// frame cannot be made any bigger or smaller than it is
+
         textField.setHorizontalAlignment(JLabel.CENTER);
         textField.setText("TicTacToe");
-        titlePanel.setLayout(new BorderLayout()); // create borderlayout for textfield and title panel
+
+        titlePanel.setLayout(new BorderLayout()); // create border layout for text field and title panel
         titlePanel.setBounds(0,0,500,100);
 
         titlePanel.add(textField);
@@ -39,7 +42,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         frame.add(buttonPanel);
         frame.createButtons(); // calls to a different method called createGUI
         frame.turn();
-        frame.setVisible(true); // makes frame visible
+
 
     }
 
