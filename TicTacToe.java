@@ -32,7 +32,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         textField.setHorizontalAlignment(JLabel.CENTER);
         textField.setText("TicTacToe");
         titlePanel.setLayout(new BorderLayout()); // create borderlayout for textfield and title panel
-        titlePanel.setBounds(0,0,800,100);
+        titlePanel.setBounds(0,0,500,100);
 
         titlePanel.add(textField);
         frame.add(titlePanel,BorderLayout.NORTH);
@@ -193,8 +193,17 @@ public class TicTacToe extends JFrame implements ActionListener {
         ) {
             oWins(2,4,6);
         }
-        for(int i=0;i>9;i++){
-            if(buttons[i].getText().equals(""));
+        if(
+                (buttons[0].getText()!=("")) &&
+                        (buttons[1].getText()!=("")) &&
+                        (buttons[2].getText()!=("")) &&
+                        (buttons[3].getText()!=("")) &&
+                        (buttons[4].getText()!=("")) &&
+                        (buttons[5].getText()!=("")) &&
+                        (buttons[6].getText()!=("")) &&
+                        (buttons[7].getText()!=("")) &&
+                        (buttons[8].getText()!=("")))
+        {
             draw();
         }
     }
@@ -215,16 +224,16 @@ public class TicTacToe extends JFrame implements ActionListener {
     }
 
     public void draw(){
+
         System.out.println("It's a draw");
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        //JButton buttonClicked = (JButton)e.getSource();
         for(int i = 0;i<9;i++){
             if(e.getSource()==buttons[i]){
                 if(player1){
-                    if(buttons[i].getText()==""){
+                    if(buttons[i].getText().equals("")){
                         buttons[i].setText("X");
                         player1 = false;
                         checkWinner();
