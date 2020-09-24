@@ -239,12 +239,14 @@ public class TicTacToe extends JFrame implements ActionListener {
                     if(buttons[i].getText().equals("")){
                         buttons[i].setText("X");
                         player1 = false;
+                        textField.setText("O turn");
                         checkWinner();
                     }
                 }
                 else if(buttons[i].getText().equals("")) {
                         buttons[i].setText("O");
                         player1=true;
+                    textField.setText("X turn");
                         checkWinner();
                 }
             }
