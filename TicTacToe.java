@@ -15,6 +15,7 @@ public class TicTacToe extends JFrame implements ActionListener {
     static JLabel textField = new JLabel();
     boolean player1 = true;
     public static void main(String[] args) {
+
         createFrame();
     }
 
@@ -56,7 +57,8 @@ public class TicTacToe extends JFrame implements ActionListener {
             buttons[i].setBackground(Color.GRAY);
             buttons[i].setText("");
             buttons[i].addActionListener(this);
-            add(buttons[i]);
+            buttonPanel.add(buttons[i]);
+
 
         }
     }
@@ -86,56 +88,56 @@ public class TicTacToe extends JFrame implements ActionListener {
                         (buttons[1].getText().equals("X")) &&
                         (buttons[2].getText().equals("X")) // check first row from X
         ) {
-            xWins(0,1,2);
+            xWins();
         }
         if(
                 (buttons[3].getText().equals("X")) &&
                         (buttons[4].getText().equals("X")) &&
                         (buttons[5].getText().equals("X")) // check second row from X
         ) {
-            xWins(3,4,5);
+            xWins();
         }
         if(
                 (buttons[6].getText().equals("X")) &&
                         (buttons[7].getText().equals("X")) &&
                         (buttons[8].getText().equals("X")) // check third row from X
         ) {
-            xWins(6,7,8);
+            xWins();
         }
         if(
                 (buttons[0].getText().equals("X")) &&
                         (buttons[3].getText().equals("X")) &&
                         (buttons[6].getText().equals("X")) // check first column from X
         ) {
-            xWins(0,3,6);
+            xWins();
         }
         if(
                 (buttons[1].getText().equals("X")) &&
                         (buttons[4].getText().equals("X")) &&
                         (buttons[7].getText().equals("X")) // check second column from X
         ) {
-            xWins(1,4,7);
+            xWins();
         }
         if(
                 (buttons[2].getText().equals("X")) &&
                         (buttons[5].getText().equals("X")) &&
                         (buttons[8].getText().equals("X")) // check third column from X
         ) {
-            xWins(2,5,8);
+            xWins();
         }
         if(
                 (buttons[0].getText().equals("X")) &&
                         (buttons[4].getText().equals("X")) &&
                         (buttons[8].getText().equals("X")) // check diagonal 1 from X
         ) {
-            xWins(0,4,8);
+            xWins();
         }
         if(
                 (buttons[2].getText().equals("X")) &&
                         (buttons[4].getText().equals("X")) &&
                         (buttons[6].getText().equals("X")) //check diagonal 2 from X
         ) {
-            xWins(2,4,6);
+            xWins();
         }
 
         //check O win conditions
@@ -144,56 +146,56 @@ public class TicTacToe extends JFrame implements ActionListener {
                         (buttons[1].getText().equals("O")) &&
                         (buttons[2].getText().equals("O")) // check first row from O
         ) {
-            oWins(0,1,2);
+            oWins();
         }
         if(
                 (buttons[3].getText().equals("O")) &&
                         (buttons[4].getText().equals("O")) &&
                         (buttons[5].getText().equals("O")) // check second row from O
         ) {
-            oWins(3,4,5);
+            oWins();
         }
         if(
                 (buttons[6].getText().equals("O")) &&
                         (buttons[7].getText().equals("O")) &&
                         (buttons[8].getText().equals("O")) // check third row from O
         ) {
-            oWins(6,7,8);
+            oWins();
         }
         if(
                 (buttons[0].getText().equals("O")) &&
                         (buttons[3].getText().equals("O")) &&
                         (buttons[6].getText().equals("O")) // check first column from O
         ) {
-            oWins(0,3,6);
+            oWins();
         }
         if(
                 (buttons[1].getText().equals("O")) &&
                         (buttons[4].getText().equals("O")) &&
                         (buttons[7].getText().equals("O")) // check second column from O
         ) {
-            oWins(1,4,7);
+            oWins();
         }
         if(
                 (buttons[2].getText().equals("O")) &&
                         (buttons[5].getText().equals("O")) &&
                         (buttons[8].getText().equals("O")) // check third column from O
         ) {
-            oWins(2,5,8);
+            oWins();
         }
         if(
                 (buttons[0].getText().equals("O")) &&
                         (buttons[4].getText().equals("O")) &&
                         (buttons[8].getText().equals("O")) // check diagonal 1 from O
         ) {
-            oWins(0,4,8);
+            oWins();
         }
         if(
                 (buttons[2].getText().equals("O")) &&
                         (buttons[4].getText().equals("O")) &&
                         (buttons[6].getText().equals("O")) // check diagonal 2 from O
         ) {
-            oWins(2,4,6);
+            oWins();
         }
         if(
                 (buttons[0].getText()!=("")) &&
@@ -211,23 +213,22 @@ public class TicTacToe extends JFrame implements ActionListener {
     }
 
 
-    public void xWins(int a, int b, int c){
+    public void xWins(){
         for(int i=0;i<9;i++) {
             buttons[i].setEnabled(false);
         }
-        System.out.println("X wins");
+        textField.setText("X wins");
     }
 
-    public void oWins(int a, int b, int c){
+    public void oWins(){
         for(int i=0;i<9;i++) {
             buttons[i].setEnabled(false);
         }
-        System.out.println("O wins");
+        textField.setText("O wins");
     }
 
     public void draw(){
-
-        System.out.println("It's a draw");
+        textField.setText("It's a draw");
     }
 
 
