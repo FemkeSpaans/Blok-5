@@ -22,7 +22,7 @@ public class Race extends JFrame {
         frame.setBounds(0, 0, 1920, 1080); // sets size of the frame
         frame.setVisible(true); // makes frame visible
 
-        JLabel label = new JLabel("Why you not showing up you little bitch?");
+        JLabel label = new JLabel("Why are you not showing up?");
         label.setBounds(860,1900,300,300);
         frame.getContentPane().add(label);
 
@@ -95,10 +95,5 @@ public class Race extends JFrame {
         h5.setName("Seabiscuit");
         h5.setBreed("American Racehorse");
         h5.setColour(Color.ORANGE);
-    }
-
-    private void GUI() {
-
-
     }
 }
