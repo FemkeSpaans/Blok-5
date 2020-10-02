@@ -23,7 +23,7 @@ public class Race extends JFrame {
         frame.setVisible(true); // makes frame visible
 
         JLabel label = new JLabel("Why are you not showing up?");
-        label.setBounds(860,1900,300,300);
+        label.setBounds(870,800,300,300);
         frame.getContentPane().add(label);
 
         JProgressBar horse1 = new JProgressBar(0, 100);
@@ -33,34 +33,33 @@ public class Race extends JFrame {
         JProgressBar horse2 = new JProgressBar(0, 100);
         horse2.setBounds(150,220,600,100);
         frame.getContentPane().add(horse2);
-        
+
         JProgressBar horse3 = new JProgressBar(0, 100);
         horse3.setBounds(150,340,600,100);
         frame.getContentPane().add(horse3);
-        
+
         JProgressBar horse4 = new JProgressBar(0, 100);
         horse4.setBounds(150,460,600,100);
         frame.getContentPane().add(horse4);
-        
+
         JProgressBar horse5 = new JProgressBar(0, 100);
         horse5.setBounds(150,580,600,100);
-        frame.getContentPane().add(horse5); 
+        frame.getContentPane().add(horse5);
 
         JButton race = new JButton("Race");
         //race.addActionListener();
-        race.setBounds(860,1500,200,200);
+        race.setBounds(150,800,200,200);
         frame.getContentPane().add(race);
 
         JButton reset = new JButton("Reset");
         //reset.addActionListener();
-        reset.setBounds(860,1100,200,200);
+        reset.setBounds(400,800,200,200);
         frame.getContentPane().add(reset);
 
         JButton quit = new JButton("Quit");
         //quit.addActionListener();
-        quit.setBounds(860,800,200,200);
+        quit.setBounds(650,800,200,200);
         frame.getContentPane().add(quit);
-
 
     }
 
