@@ -1,16 +1,17 @@
 package Afvink4;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Horse {
 
-    // what kind of traits does a horse have?
-    // name
     String name;
-    // breed
     String breed;
-    // colour
     Color colour;
+    Random random = new Random();
+    private int x, horseNumber;
+    private static int amount = 0;
+
 
     public void setName(String horseName) {
         this.name = horseName;
@@ -36,8 +37,20 @@ public class Horse {
         return colour;
     }
 
+    public int getDistance() {
+        return this.x;
+    }
 
 
+    public int getHorseNumber() {
+        return horseNumber;
+    }
 
+    public void setHorseNumber(int horseNumber) {
+        this.horseNumber = horseNumber = ++ amount;
+    }
 
+    public void loop() {
+        this.x = this.x + random.nextInt(11);
+    }
 }
