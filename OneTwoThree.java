@@ -29,12 +29,10 @@ public class OneTwoThree extends JFrame {
         frame.add(button);
         button.addActionListener(e ->{
             //Scanner input = new Scanner(System.in);
-            textfield.getText();
-            for(int i =0; i < textfield ; i++){
-                textfield
+            String text = textfield.getText();
+            for(int i =0; i < text ; i++){
+                System.out.println(text);
             }
-
-
         });
         JLabel label = new JLabel();
         label.setBounds(20, 180, 360, 100);
