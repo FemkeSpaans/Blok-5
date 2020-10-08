@@ -2,6 +2,8 @@ package Afvink5;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class OneTwoThree extends JFrame {
@@ -28,17 +30,26 @@ public class OneTwoThree extends JFrame {
         button.setBounds(140,90, 100,50);
         frame.add(button);
         button.addActionListener(e ->{
-            //Scanner input = new Scanner(System.in);
             String text = textfield.getText();
-            for(int i =0; i < text ; i++){
-                System.out.println(text);
+            text.equalsIgnoreCase(text);
+
+            JLabel label = new JLabel();
+            label.setBounds(20, 180, 360, 100);
+            frame.add(label);
+
+            for(String i = text;;){
+                try {
+                    Translator.one2three(i);
+                } catch (NotAnAA notAnAA) {
+                    notAnAA.printStackTrace();
+                }
+                label.setText(Translator.THREE[Integer.parseInt(i)]);
+                break;
             }
         });
-        JLabel label = new JLabel();
-        label.setBounds(20, 180, 360, 100);
-        frame.add(label);
-
         frame.setVisible(true); // makes frame visible
+    }
+
 
     }
-}
+
