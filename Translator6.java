@@ -2,6 +2,9 @@ package Afvink6;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Translator6 {
     public static void main(String[] args) {
@@ -30,6 +33,13 @@ public class Translator6 {
         browse_button.setBackground(Color.GRAY);
         browse_button.setForeground(Color.BLACK);
         frame.add(browse_button);
+        browse_button.addActionListener(e ->{
+            try {
+                FileReader.file();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
 
         JButton analayse_button = new JButton();
         analayse_button.setBounds(540, 20, 100, 20);
@@ -37,6 +47,9 @@ public class Translator6 {
         analayse_button.setBackground(Color.GRAY);
         analayse_button.setForeground(Color.BLACK);
         frame.add(analayse_button);
+        analayse_button.addActionListener(e ->{
+            FileReader.calculate(reader);
+        });
 
         JTextArea textarea = new JTextArea();
         textarea.setBounds(20, 60,740, 400);
@@ -49,4 +62,4 @@ public class Translator6 {
 
         frame.setVisible(true); // makes frame visible
     }
-}
+            }

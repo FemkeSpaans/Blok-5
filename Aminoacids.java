@@ -1,6 +1,7 @@
 package Afvink6;
 
 public class Aminoacids {
+
     static final String[] Aminoacids = {"A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K"
             , "M", "F", "P", "S", "T", "W", "Y", "V"}; // array of one letter code amino acids
 
@@ -19,9 +20,7 @@ public class Aminoacids {
     and one that counts the non polar amino acids.
      */
 
-    int total_amino_acids = 0;
-    int polar_amino_acids = 0;
-    int nonpolar_amino_acids = 0;
+
 
 
 

@@ -1,27 +1,38 @@
 package Afvink6;
 
+import javax.swing.*;
 import java.io.*;
+import java.nio.Buffer;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
 
 
 public class FileReader {
+    BufferedReader reader;
     public static void main(String[] args) throws IOException {
-        file();
+        BufferedReader reader = file();
+        calculate(reader);
     }
 
-    public static void file() throws IOException {
-        File file = new File("C:\\Users\\FSpaa\\IdeaProjects\\PractiseRoundOne\\src\\Afvink6\\alpha_amylase.txt");
+    public static BufferedReader file() throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file = chooser.getSelectedFile();
         FileInputStream fileStream = new FileInputStream(file);
         InputStreamReader input = new InputStreamReader(fileStream);
         BufferedReader reader = new BufferedReader(input);
+        return reader;
 
+    }
+
+    public static void calculate(BufferedReader reader) throws IOException {
         String line;
 
         int total_amino_acids = 0;
         int polar_amino_acids = 0;
         int nonpolar_amino_acids = 0;
+
 
         while ((line = reader.readLine()) != null) {// while there are line to go
             total_amino_acids += line.length(); // add 1 to this int
@@ -29,28 +40,20 @@ public class FileReader {
             List<String> list_non_polar = Arrays.asList(Aminoacids.Nonpolar);
             for (int i = 0; i < line.length(); i++) {
                 char var = line.charAt(i);
-                Character.toString(var);
-                if(list_polar.contains(var)){
+                String var1 = Character.toString(var);
+                if (list_polar.contains(var1)) {
                     polar_amino_acids++;
                 }
-                if(list_non_polar.contains(var)){
+                if (list_non_polar.contains(var1)) {
                     nonpolar_amino_acids++;
                 }
-//                if(Aminoacids.Polar.contains(var))
-//                if (var.equals(Aminoacids.Polar)) {
-//                    polar_amino_acids++;
-//                }
-//                if (var.equals(Aminoacids.Nonpolar)) {
-//                    nonpolar_amino_acids++;
-//                }
+
             }
-            System.out.println(total_amino_acids);
-            System.out.println(polar_amino_acids);
-            System.out.println(nonpolar_amino_acids);
-//        Scanner scan = new Scanner(file);
-//        while (scan.hasNextLine()) {
-//            System.out.println(scan.nextLine());
-//        }
         }
+        System.out.println(total_amino_acids);
+        System.out.println(polar_amino_acids);
+        System.out.println(nonpolar_amino_acids);
     }
 }
+
+
