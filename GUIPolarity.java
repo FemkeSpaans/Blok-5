@@ -13,7 +13,7 @@ get path from browse button en set text of the textfield,
 with analyse button get the text from the textfield and open that file
  */
 
-public class GUIPolarity extends JFrame implements ActionListener {
+public class GUIPolarity extends JFrame implements ActionListener{
     JButton browse_button, analayse_button;
     JLabel label = new JLabel();
     JTextField textfield = new JTextField();
@@ -30,7 +30,6 @@ public class GUIPolarity extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.createGUI(); // calls to a different method called createGUI
         frame.setVisible(true); // makes frame visible
-
     }
 
     public void createGUI() {
@@ -48,6 +47,14 @@ public class GUIPolarity extends JFrame implements ActionListener {
         browse_button.setBackground(Color.GRAY);
         browse_button.setForeground(Color.BLACK);
         window.add(browse_button);
+        browse_button.addActionListener(this);
+
+        analayse_button.setBounds(540, 20, 100, 20);
+        analayse_button.setText("Analyse");
+        analayse_button.setBackground(Color.GRAY);
+        analayse_button.setForeground(Color.BLACK);
+        window.add(analayse_button);
+        analayse_button.addActionListener(this);
 
         textarea.setBounds(20, 60, 740, 400);
         window.add(textarea);
@@ -55,16 +62,6 @@ public class GUIPolarity extends JFrame implements ActionListener {
         panel.setBounds(20, 500, 740, 240);
         panel.setBackground(Color.WHITE);
         window.add(panel);
-
-        analayse_button.setBounds(540, 20, 100, 20);
-        analayse_button.setText("Analyse");
-        analayse_button.setBackground(Color.GRAY);
-        analayse_button.setForeground(Color.BLACK);
-        window.add(analayse_button);
-
-        window.setVisible(true); // makes frame visible
-        browse_button.addActionListener(this);
-        analayse_button.addActionListener(this);
     }
 
     public void readFile() {
@@ -120,21 +117,23 @@ public class GUIPolarity extends JFrame implements ActionListener {
         File selectedFile;
         int reply;
         if (evt.getSource() == browse_button) {
-            fileChooser = new JFileChooser();
-            reply = fileChooser.showSaveDialog(this);
-            if (reply == JFileChooser.APPROVE_OPTION) {
-                selectedFile = fileChooser.getSelectedFile();
-                textfield.setText(selectedFile.getAbsolutePath());
-            }
+            textfield.setText("Browse");
+//            fileChooser = new JFileChooser();
+//            reply = fileChooser.showSaveDialog(this);
+//            if (reply == JFileChooser.APPROVE_OPTION) { // if value is true file is chosen
+//                selectedFile = fileChooser.getSelectedFile(); // gets the selected file
+//                textfield.setText(selectedFile.getAbsolutePath()); // gets the absolute path of the file selected
+//            }
         }
-        if (evt.getSource() == analayse_button) {
-            fileChooser = new JFileChooser();
-            reply = fileChooser.showOpenDialog(this);
-            if (reply == JFileChooser.APPROVE_OPTION) {
-                selectedFile = fileChooser.getSelectedFile();
-                textfield.setText(selectedFile.getAbsolutePath());
-                readFile();
-            }
+        if (evt.getSource() == analayse_button) { // gets the source of the thing which is pressed, if it is analysebutton it continues
+              textfield.setText("Analyse");
+//            fileChooser = new JFileChooser();
+//            reply = fileChooser.showOpenDialog(this);
+//            if (reply == JFileChooser.APPROVE_OPTION) {
+//                selectedFile = fileChooser.getSelectedFile();
+//                textfield.setText(selectedFile.getAbsolutePath());
+//                readFile();
+//            }
         }
 
     }
