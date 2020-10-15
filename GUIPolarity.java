@@ -75,11 +75,9 @@ public class GUIPolarity extends JFrame implements ActionListener {
         float nonpolar_amino_acids = 0f;
 
         while ((line = inFile.readLine()) != null) { // while there are lines to go
-            if (line.startsWith(">")) {// this never goes to the else statement
-            }
-            else if (!line.startsWith(">")) {
+            if (line.startsWith(">")) {// this never goes to the else if statement
+            } else if (!line.startsWith(">")) {
                 total_amino_acids += line.length(); // add 1 to this int
-                System.out.println(total_amino_acids);// this wont print???
                 List<String> list_polar = Arrays.asList(AminoAcids.Polar);
                 List<String> list_non_polar = Arrays.asList(AminoAcids.Nonpolar);
                 for (int i = 0; i < line.length(); i++) {
