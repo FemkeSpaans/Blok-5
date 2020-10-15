@@ -140,6 +140,14 @@ public class GUIPolarity extends JFrame implements ActionListener {
         Graphics paper = panel.getGraphics();
         paper.clearRect(20, 500, 740, 240); //clears drawing field
 
+        paper.setColor(Color.cyan);
+        paper.drawRect(0,0, 500, 50);
+        paper.fillRect(0,0, (500*polar),50 );
+
+        paper.setColor(Color.orange);
+        paper.drawRect(0,60, 500, 50);
+        paper.fillRect(0,60,(500*non_polar),50); 
+
     }
 }
 
