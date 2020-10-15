@@ -75,9 +75,11 @@ public class GUIPolarity extends JFrame implements ActionListener {
         float nonpolar_amino_acids = 0f;
 
         while ((line = inFile.readLine()) != null) { // while there are lines to go
-            if(line.startsWith(">")) {
-            } else {
+            if (line.startsWith(">")) {// this never goes to the else statement
+            }
+            else if (!line.startsWith(">")) {
                 total_amino_acids += line.length(); // add 1 to this int
+                System.out.println(total_amino_acids);// this wont print???
                 List<String> list_polar = Arrays.asList(AminoAcids.Polar);
                 List<String> list_non_polar = Arrays.asList(AminoAcids.Nonpolar);
                 for (int i = 0; i < line.length(); i++) {
@@ -85,6 +87,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
                     String var1 = Character.toString(var);
                     if (list_polar.contains(var1)) {
                         polar_amino_acids++;
+
                     }
                     if (list_non_polar.contains(var1)) {
                         nonpolar_amino_acids++;
@@ -104,7 +107,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed (ActionEvent evt){
+    public void actionPerformed(ActionEvent evt) {
         File selectedFile;
         int reply;
         if (evt.getSource() == browse_button) {
@@ -130,7 +133,8 @@ public class GUIPolarity extends JFrame implements ActionListener {
         }
 
     }
-    public static void draw(float[] percentages){
+
+    public static void draw(float[] percentages) {
         // pass along percentage polar and percentage nonpolar, round both to two decimals
         // create two rectangles
         // file both rectangles with the appropriate percentages
@@ -141,12 +145,12 @@ public class GUIPolarity extends JFrame implements ActionListener {
         paper.clearRect(20, 500, 740, 240); //clears drawing field
 
         paper.setColor(Color.cyan);
-        paper.drawRect(0,0, 500, 50);
-        paper.fillRect(0,0, (500*polar),50 );
+        paper.drawRect(0, 0, 600, 50);
+        paper.fillRect(0, 0, (600 * polar), 50);
 
         paper.setColor(Color.orange);
-        paper.drawRect(0,60, 500, 50);
-        paper.fillRect(0,60,(500*non_polar),50); 
+        paper.drawRect(0, 60, 600, 50);
+        paper.fillRect(0, 60, (600 * non_polar), 50);
 
     }
 }
