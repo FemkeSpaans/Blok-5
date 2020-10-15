@@ -62,7 +62,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
         window.add(panel);
     }
 
-    public float readFile(float percentage_polar, float percentage_non_polar) throws IOException {
+    public float[] readFile() throws IOException {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
@@ -92,13 +92,15 @@ public class GUIPolarity extends JFrame implements ActionListener {
                 }
             }
         }
-        percentage_polar = polar_amino_acids / total_amino_acids * 100;
-        percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
+        //textarea.append("The number of amino acids in this file is: "+total_amino_acids);
+        float percentage_polar = polar_amino_acids / total_amino_acids * 100;
+        float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
+        float[] percentages = {percentage_non_polar, percentage_polar};
+        System.out.println(percentage_non_polar);
+        System.out.println(percentage_polar);
         inFile.close();
-        //draw();
-        return percentage_polar;
-        return percentage_non_polar;
-
+        draw(percentages);
+        return percentages;
     }
 
     @Override
@@ -128,17 +130,17 @@ public class GUIPolarity extends JFrame implements ActionListener {
         }
 
     }
-//    public static void draw(float percentage_polar, float percentage_non_polar){
-//        // pass along percentage polar and percentage nonpolar, round both to two decimals
-//        // create two rectangles
-//        // file both rectangles with the appropriate percentages
-//        int polar = Math.round(percentage_polar);
-//        int non_polar = Math.round(percentage_non_polar);
-//
-//        Graphics paper = panel.getGraphics();
-//        paper.clearRect(20, 500, 740, 240); //clears drawing field
-//
-//    }
+    public static void draw(float[] percentages){
+        // pass along percentage polar and percentage nonpolar, round both to two decimals
+        // create two rectangles
+        // file both rectangles with the appropriate percentages
+        int polar = Math.round(percentages[0]);
+        int non_polar = Math.round(percentages[1]);
+
+        Graphics paper = panel.getGraphics();
+        paper.clearRect(20, 500, 740, 240); //clears drawing field
+
+    }
 }
 
 
