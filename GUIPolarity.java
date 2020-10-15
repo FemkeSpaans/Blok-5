@@ -18,7 +18,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
     JLabel label = new JLabel();
     JTextField textfield = new JTextField();
     JTextArea textarea = new JTextArea();
-    JPanel panel = new JPanel();
+    static JPanel panel = new JPanel();
     BufferedReader inFile;
     JFileChooser fileChooser;
 
@@ -61,12 +61,13 @@ public class GUIPolarity extends JFrame implements ActionListener {
         textarea.setBounds(20, 60, 740, 400);
         window.add(textarea);
 
+        panel = new JPanel();
         panel.setBounds(20, 500, 740, 240);
         panel.setBackground(Color.WHITE);
         window.add(panel);
     }
 
-    public void readFile() throws IOException {
+    public float readFile(float percentage_polar, float percentage_non_polar) throws IOException {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
@@ -95,12 +96,13 @@ public class GUIPolarity extends JFrame implements ActionListener {
                     }
                 }
             }
-            float percentage_polar = polar_amino_acids / total_amino_acids * 100;
-            float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100;
-            System.out.println(Math.round(percentage_polar));
-            System.out.println(Math.round(percentage_non_polar));
-            inFile.close();
         }
+        float percentage_polar = polar_amino_acids / total_amino_acids * 100;
+        float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
+        inFile.close();
+        //draw();
+        return percentage_polar;
+        return percentage_non_polar;
     }
 
     @Override
@@ -126,10 +128,21 @@ public class GUIPolarity extends JFrame implements ActionListener {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                    }
-                }
-
             }
         }
+
+    }
+//    public static void draw(float percentage_polar, float percentage_non_polar){
+//        // pass along percentage polar and percentage nonpolar, round both to two decimals
+//        // create two rectangles
+//        // file both rectangles with the appropriate percentages
+//        int polar = Math.round(percentage_polar);
+//        int non_polar = Math.round(percentage_non_polar);
+//
+//        Graphics paper = panel.getGraphics();
+//        paper.clearRect(20, 500, 740, 240); //clears drawing field
+//
+//    }
+}
 
 
