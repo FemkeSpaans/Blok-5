@@ -5,15 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-//import java.util.Arrays;
-//import java.util.List;
+import java.util.Arrays;
+import java.util.List;
 
 /*
 get path from browse button en set text of the textfield,
 with analyse button get the text from the textfield and open that file
  */
 
-public class GUIPolarity extends JFrame implements ActionListener{
+public class GUIPolarity extends JFrame implements ActionListener {
     JButton browse_button, analayse_button;
     JLabel label = new JLabel();
     JTextField textfield = new JTextField();
@@ -42,6 +42,7 @@ public class GUIPolarity extends JFrame implements ActionListener{
         textfield.setBounds(60, 20, 320, 20);
         window.add(textfield);
 
+        browse_button = new JButton();
         browse_button.setBounds(420, 20, 100, 20);
         browse_button.setText("Browse");
         browse_button.setBackground(Color.GRAY);
@@ -49,6 +50,7 @@ public class GUIPolarity extends JFrame implements ActionListener{
         window.add(browse_button);
         browse_button.addActionListener(this);
 
+        analayse_button = new JButton();
         analayse_button.setBounds(540, 20, 100, 20);
         analayse_button.setText("Analyse");
         analayse_button.setBackground(Color.GRAY);
@@ -64,77 +66,70 @@ public class GUIPolarity extends JFrame implements ActionListener{
         window.add(panel);
     }
 
-    public void readFile() {
+    public void readFile() throws IOException {
+        inFile = new BufferedReader(new FileReader(textfield.getText()));
+        textarea.setText("");
+        String line;
+        while ((line = inFile.readLine()) != null) {
+            textarea.append(line + "\n");
+        }
 
-        try {
-            inFile = new BufferedReader(new FileReader(textfield.getText()));
-            textarea.setText("");
-            String line;
-            while ((line = inFile.readLine()) != null) {
-                textarea.append(line + "\n");
+        float total_amino_acids = 0f;
+        float polar_amino_acids = 0f;
+        float nonpolar_amino_acids = 0f;
+
+        while ((line = inFile.readLine()) != null) { // while there are lines to go
+            if(line.startsWith(">")) {
+            } else {
+                total_amino_acids += line.length(); // add 1 to this int
+                List<String> list_polar = Arrays.asList(AminoAcids.Polar);
+                List<String> list_non_polar = Arrays.asList(AminoAcids.Nonpolar);
+                for (int i = 0; i < line.length(); i++) {
+                    char var = line.charAt(i);
+                    String var1 = Character.toString(var);
+                    if (list_polar.contains(var1)) {
+                        polar_amino_acids++;
+                    }
+                    if (list_non_polar.contains(var1)) {
+                        nonpolar_amino_acids++;
+                    }
+                }
             }
+            float percentage_polar = polar_amino_acids / total_amino_acids * 100;
+            float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100;
+            System.out.println(Math.round(percentage_polar));
+            System.out.println(Math.round(percentage_non_polar));
             inFile.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,
-                    "File Error: " + e.toString());
         }
     }
 
-
-//    public static void calculate(BufferedReader reader) throws IOException {
-//        String line;
-//
-//        float total_amino_acids = 0f;
-//        float polar_amino_acids = 0f;
-//        float nonpolar_amino_acids = 0f;
-//
-//        while ((line = reader.readLine()) != null) { // while there are lines to go
-//            if (line.startsWith(">")) {
-//            } else {
-//                total_amino_acids += line.length(); // add 1 to this int
-//                java.util.List<String> list_polar = Arrays.asList(AminoAcids.Polar);
-//                List<String> list_non_polar = Arrays.asList(AminoAcids.Nonpolar);
-//                for (int i = 0; i < line.length(); i++) {
-//                    char var = line.charAt(i);
-//                    String var1 = Character.toString(var);
-//                    if (list_polar.contains(var1)) {
-//                        polar_amino_acids++;
-//                    }
-//                    if (list_non_polar.contains(var1)) {
-//                        nonpolar_amino_acids++;
-//                    }
-//                }
-//            }
-//        }
-//        float percentage_polar = polar_amino_acids / total_amino_acids * 100;
-//        float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100;
-//        //System.out.println(Math.round(percentage_polar));
-//        //System.out.println(Math.round(percentage_non_polar));
-//    }
-
     @Override
-    public void actionPerformed(ActionEvent evt) {
+    public void actionPerformed (ActionEvent evt){
         File selectedFile;
         int reply;
         if (evt.getSource() == browse_button) {
-            textfield.setText("Browse");
-//            fileChooser = new JFileChooser();
-//            reply = fileChooser.showSaveDialog(this);
-//            if (reply == JFileChooser.APPROVE_OPTION) { // if value is true file is chosen
-//                selectedFile = fileChooser.getSelectedFile(); // gets the selected file
-//                textfield.setText(selectedFile.getAbsolutePath()); // gets the absolute path of the file selected
-//            }
+            fileChooser = new JFileChooser();
+            reply = fileChooser.showSaveDialog(this);
+            if (reply == JFileChooser.APPROVE_OPTION) { // if value is true file is chosen
+                selectedFile = fileChooser.getSelectedFile(); // gets the selected file
+                textfield.setText(selectedFile.getAbsolutePath()); // gets the absolute path of the file selected
+            }
         }
         if (evt.getSource() == analayse_button) { // gets the source of the thing which is pressed, if it is analysebutton it continues
-              textfield.setText("Analyse");
-//            fileChooser = new JFileChooser();
-//            reply = fileChooser.showOpenDialog(this);
-//            if (reply == JFileChooser.APPROVE_OPTION) {
-//                selectedFile = fileChooser.getSelectedFile();
-//                textfield.setText(selectedFile.getAbsolutePath());
-//                readFile();
-//            }
+            fileChooser = new JFileChooser();
+            reply = fileChooser.showOpenDialog(this);
+            if (reply == JFileChooser.APPROVE_OPTION) {
+                selectedFile = fileChooser.getSelectedFile();
+                textfield.setText(selectedFile.getAbsolutePath());
+                try {
+                    readFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                    }
+                }
+
+            }
         }
 
-    }
-}
+
