@@ -8,11 +8,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-/*
-get path from browse button en set text of the textfield,
-with analyse button get the text from the textfield and open that file
- */
-
 public class GUIPolarity extends JFrame implements ActionListener {
     JButton browse_button, analayse_button;
     JLabel label = new JLabel();
@@ -97,12 +92,13 @@ public class GUIPolarity extends JFrame implements ActionListener {
                 }
             }
         }
-        float percentage_polar = polar_amino_acids / total_amino_acids * 100;
-        float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
+        percentage_polar = polar_amino_acids / total_amino_acids * 100;
+        percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
         inFile.close();
         //draw();
         return percentage_polar;
         return percentage_non_polar;
+
     }
 
     @Override
