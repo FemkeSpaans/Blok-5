@@ -62,7 +62,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
         window.add(panel);
     }
 
-    public float[] readFile() throws IOException {
+    public float[] readFile() throws IOException, NotAnAA {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
@@ -82,6 +82,7 @@ public class GUIPolarity extends JFrame implements ActionListener {
                 for (int i = 0; i < line.length(); i++) {
                     char var = line.charAt(i);
                     String var1 = Character.toString(var);
+                    AminoAcids.not_amino_acid(var1);
                     if (list_polar.contains(var1)) {
                         polar_amino_acids++;
                     }
@@ -127,8 +128,8 @@ public class GUIPolarity extends JFrame implements ActionListener {
                 textfield.setText(selectedFile.getAbsolutePath());
                 try {
                     readFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException | NotAnAA e) {
+                    textarea.setText(e.toString());
                 }
             }
         }
