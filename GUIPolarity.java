@@ -66,15 +66,14 @@ public class GUIPolarity extends JFrame implements ActionListener {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
-        while ((line = inFile.readLine()) != null) {
+
+        int total_amino_acids = 0;
+        int polar_amino_acids = 0;
+        int nonpolar_amino_acids = 0;
+
+        line = inFile.readLine();
+        while (line != null) { // while there are lines to go
             textarea.append(line + "\n");
-        }
-
-        float total_amino_acids = 0f;
-        float polar_amino_acids = 0f;
-        float nonpolar_amino_acids = 0f;
-
-        while ((line = inFile.readLine()) != null) { // while there are lines to go
             if (line.startsWith(">")) {// this never goes to the else if statement
             } else if (!line.startsWith(">")) {
                 total_amino_acids += line.length(); // add 1 to this int
@@ -85,20 +84,24 @@ public class GUIPolarity extends JFrame implements ActionListener {
                     String var1 = Character.toString(var);
                     if (list_polar.contains(var1)) {
                         polar_amino_acids++;
-
                     }
                     if (list_non_polar.contains(var1)) {
                         nonpolar_amino_acids++;
                     }
                 }
             }
+            line = inFile.readLine();
         }
-        //textarea.append("The number of amino acids in this file is: "+total_amino_acids);
-        float percentage_polar = polar_amino_acids / total_amino_acids * 100;
-        float percentage_non_polar = nonpolar_amino_acids / total_amino_acids * 100f;
+        textarea.append("The number of amino acids in this file is: "+total_amino_acids);
+        textarea.append("\nThe number of polar amino acids in this file is: "+polar_amino_acids);
+        textarea.append("\nThe number of non polar amino acids in this file is: "+nonpolar_amino_acids);
+
+        float total_amino_acids1 = total_amino_acids;
+        float polar_amino_acids1 = polar_amino_acids;
+        float nonpolar_amino_acids1 = nonpolar_amino_acids;
+        float percentage_polar = polar_amino_acids1 / total_amino_acids1 * 100;
+        float percentage_non_polar = nonpolar_amino_acids1 / total_amino_acids1 * 100f;
         float[] percentages = {percentage_non_polar, percentage_polar};
-        System.out.println(percentage_non_polar);
-        System.out.println(percentage_polar);
         inFile.close();
         draw(percentages);
         return percentages;
@@ -138,17 +141,19 @@ public class GUIPolarity extends JFrame implements ActionListener {
         // file both rectangles with the appropriate percentages
         int polar = Math.round(percentages[0]);
         int non_polar = Math.round(percentages[1]);
+        System.out.println(polar);
+        System.out.println(non_polar);
 
         Graphics paper = panel.getGraphics();
         paper.clearRect(20, 500, 740, 240); //clears drawing field
 
         paper.setColor(Color.cyan);
         paper.drawRect(0, 0, 600, 50);
-        paper.fillRect(0, 0, (600 * polar), 50);
+        paper.fillRect(0, 0, (600 * polar/100), 50);
 
         paper.setColor(Color.orange);
         paper.drawRect(0, 60, 600, 50);
-        paper.fillRect(0, 60, (600 * non_polar), 50);
+        paper.fillRect(0, 60, (600 * non_polar/100), 50); // must be between 0.0 and 1.0
 
     }
 }
