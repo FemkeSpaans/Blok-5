@@ -57,7 +57,7 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
         window.add(panel);
     }
 
-    public void readFile() throws IOException, NoValidSeq {
+    public void readFile() throws IOException, NotValidAmino, NotValidRNA, NotValidDNA {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
@@ -73,7 +73,9 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
                 for (int i = 0; i < line.length(); i++) {
                     char var = line.charAt(i);
                     String var1 = Character.toString(var);
-                    SeqDecider.not_amino_dna_rna(var1);
+                    SeqDecider.not_amino(var1);
+                    SeqDecider.not_dna(var1);
+                    SeqDecider.not_rna(var1);
                 }
             }
             line = inFile.readLine();
@@ -92,7 +94,7 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
                     textfield.setText(selectedFile.getAbsolutePath());
                     try {
                         readFile();
-                    } catch (IOException | NoValidSeq e) {
+                    } catch (IOException | NotValidDNA | NotValidAmino | NotValidRNA e) {
                         textarea.setText(e.toString());
                     }
                 }
