@@ -1,7 +1,5 @@
 package Afvink7;
 
-import Afvink7.NoValidSeq;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class GuiAfvink7 extends JFrame implements ActionListener {
+public class SequenceVisualizer extends JFrame implements ActionListener {
     static JButton browse_button;
     static JLabel label = new JLabel();
     static JTextField textfield = new JTextField();
@@ -23,7 +21,7 @@ public class GuiAfvink7 extends JFrame implements ActionListener {
     JFileChooser fileChooser;
 
     public static void main(String[] args) {
-        GuiAfvink7 frame = new GuiAfvink7(); //create a new frame
+        SequenceVisualizer frame = new SequenceVisualizer(); //create a new frame
         frame.setTitle("Sequence Visualisation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // close frame when closing
         frame.setSize(800, 800); // sets size of the frame
@@ -59,16 +57,29 @@ public class GuiAfvink7 extends JFrame implements ActionListener {
         window.add(panel);
     }
 
-    public float[] readFile() throws IOException, NoValidSeq {
+    public void readFile() throws IOException, NoValidSeq {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
         line = inFile.readLine();
         while (line != null) { // while there are lines to go
             textarea.append(line + "\n");
+
+            if (line.startsWith(">")) {// this never goes to the else if statement
+            } else if (!line.startsWith(">")) {
+                List<String> list_amino = Arrays.asList(SeqDecider.Aminoacids);
+                List<String> list_dna = Arrays.asList(SeqDecider.DNA);
+                List<String> list_rna = Arrays.asList(SeqDecider.RNA);
+                for (int i = 0; i < line.length(); i++) {
+                    char var = line.charAt(i);
+                    String var1 = Character.toString(var);
+                    SeqDecider.not_amino_dna_rna(var1);
+                }
+            }
             line = inFile.readLine();
         }
-
+        inFile.close();
+    }
         @Override
         public void actionPerformed (ActionEvent event){
             File selectedFile;
@@ -88,4 +99,7 @@ public class GuiAfvink7 extends JFrame implements ActionListener {
             }
         }
     }
-}
+
+
+
+

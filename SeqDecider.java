@@ -13,10 +13,10 @@ public class SeqDecider {
         if (!(Arrays.toString(Aminoacids).contains(symbol))) {
             throw new NoValidSeq("This is not an existing amino acid: " + symbol);
         }
-        if(!(Arrays.toString(DNA).contains(symbol))){
+        else if(!(Arrays.toString(DNA).contains(symbol))){
             throw new NoValidSeq("This is not an existing nucleobase of DNA: " + symbol);
         }
-        if(!(Arrays.toString(RNA).contains(symbol))){
+        else if(!(Arrays.toString(RNA).contains(symbol))){
             throw new NoValidSeq("This is not an existing nucleobase of RNA: " + symbol);
         }
     }
