@@ -13,7 +13,7 @@ public enum Color {
     GREY(2),
     YELLOW(3);
 
-    Color(int i) {
+    Color(int integer) {
     }
 }
 
