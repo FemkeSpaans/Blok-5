@@ -50,6 +50,7 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
         browse_button.addActionListener(this);
 
         textarea.setBounds(20, 60, 740, 400);
+        textarea.setLineWrap(true);
         window.add(textarea);
 
         panel = new JPanel();
@@ -58,46 +59,37 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
         window.add(panel);
     }
 
+
     public void readFile() throws IOException {
-        inFile = new BufferedReader(new FileReader(textfield.getText()));
-        textarea.setText("");
-        String line;
-        line = inFile.readLine();
-        while (line != null) { // while there are lines to go
-            textarea.append(line + "\n");
-
-            if (line.startsWith(">")) {// this never goes to the else if statement
-            } else if (!line.startsWith(">")) {
-//                List<String> list_amino = Arrays.asList(SeqDecider.Aminoacids);
-//                List<String> list_dna = Arrays.asList(SeqDecider.DNA);
-//                List<String> list_rna = Arrays.asList(SeqDecider.RNA);
-                for (int i = 0; i < line.length(); i++) {
-                    char var = line.charAt(i);
-                    //String var1 = Character.toString(var);
-//                    SeqDecider.not_amino(var1);
-//                    SeqDecider.not_dna(var1);
-//                    SeqDecider.not_rna(var1);
-                    if (textarea.getText().matches("^[ATCG]*$")) {
-                        is_dna();
-                    }
-                    else if (textarea.getText().matches("^[AUCG]*$")) {
-                        is_rna();
-                    }
-                    else if (textarea.getText().matches("^[ARNDCQGEHILKMFPSTWYV]*$")) {
-                        is_protein();
-                    } else{
-                        try {
-                            throw new NoValidSeq();
-                        } catch (NoValidSeq e) {
-                            textarea.setText(e.toString());
-                        }
-
-                    }
+        try {
+            inFile = new BufferedReader(new FileReader(textfield.getText()));
+            textarea.setText("");
+            String line;
+            while ((line = inFile.readLine()) != null) {
+                if (!line.contains(">")) {
+                    textarea.append(line.toUpperCase());
                 }
             }
-            line = inFile.readLine();
+            inFile.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "File Error: " + e.toString());
         }
-        inFile.close();
+        if (textarea.getText().matches("^[ATCG]*$")) {
+            is_dna();
+        }
+        else if (textarea.getText().matches("^[AUCG]*$")) {
+            is_rna();
+        }
+        else if (textarea.getText().matches("^[ARNDCQGEHILKMFPSTWYV]*$")) {
+            is_protein();
+        } else{
+            try {
+                throw new NoValidSeq();
+            } catch (NoValidSeq e) {
+                textarea.setText(e.toString());
+            }
+        }
     }
 
     public static void is_dna() {
