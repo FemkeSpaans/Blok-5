@@ -1,24 +1,37 @@
 package Afvink7;
 
+import java.awt.*;
+
 public abstract class Sequence {
     public String sequence;
-    public int value;
+    protected Color[] color;
 
-    public void Sequence(String sequence) {
+
+    public Sequence(String sequence) {
         this.sequence = sequence;
     }
-public enum Color {
-    RED(0),
-    BLUE(1),
-    GREY(2),
-    YELLOW(3);
+/*public enum Color {
+    RED(Color.RED),
+    BLUE(Color.BLUE),
+    GREY(Color.GREY),
+    YELLOW(Color.YELLOW);
 
-    Color(int integer) {
+    private final Color color;
+
+    Color(Color color) {
+        this.color = color;
     }
-}
 
+    public Color getColor(){
+        return color;
+    }
+}*/
     public void setSequence(String sequence) {
         this.sequence = sequence;
+    }
+
+    public Color[] getColor() {
+        return this.color;
     }
 
     public String getSequence() {
@@ -28,8 +41,6 @@ public enum Color {
     public int getLength() {
         return this.sequence.length();
     }
-    public int getColor(int integer){
-        this.value = integer;
-        return this.value;
-    }
+
 }
+

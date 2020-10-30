@@ -8,8 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class SequenceVisualizer extends JFrame implements ActionListener {
     static JButton browse_button;
@@ -19,6 +17,9 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
     static JPanel panel = new JPanel();
     BufferedReader inFile;
     JFileChooser fileChooser;
+    static DNA dna;
+    static RNA rna;
+    static Protein protein;
 
     public static void main(String[] args) {
         SequenceVisualizer frame = new SequenceVisualizer(); //create a new frame
@@ -57,7 +58,7 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
         window.add(panel);
     }
 
-    public void readFile() throws IOException, NotValidAmino, NotValidRNA, NotValidDNA {
+    public void readFile() throws IOException {
         inFile = new BufferedReader(new FileReader(textfield.getText()));
         textarea.setText("");
         String line;
@@ -67,40 +68,105 @@ public class SequenceVisualizer extends JFrame implements ActionListener {
 
             if (line.startsWith(">")) {// this never goes to the else if statement
             } else if (!line.startsWith(">")) {
-                List<String> list_amino = Arrays.asList(SeqDecider.Aminoacids);
-                List<String> list_dna = Arrays.asList(SeqDecider.DNA);
-                List<String> list_rna = Arrays.asList(SeqDecider.RNA);
+//                List<String> list_amino = Arrays.asList(SeqDecider.Aminoacids);
+//                List<String> list_dna = Arrays.asList(SeqDecider.DNA);
+//                List<String> list_rna = Arrays.asList(SeqDecider.RNA);
                 for (int i = 0; i < line.length(); i++) {
                     char var = line.charAt(i);
-                    String var1 = Character.toString(var);
-                    SeqDecider.not_amino(var1);
-                    SeqDecider.not_dna(var1);
-                    SeqDecider.not_rna(var1);
+                    //String var1 = Character.toString(var);
+//                    SeqDecider.not_amino(var1);
+//                    SeqDecider.not_dna(var1);
+//                    SeqDecider.not_rna(var1);
+                    if (textarea.getText().matches("^[ATCG]*$")) {
+                        is_dna();
+                    }
+                    else if (textarea.getText().matches("^[AUCG]*$")) {
+                        is_rna();
+                    }
+                    else if (textarea.getText().matches("^[ARNDCQGEHILKMFPSTWYV]*$")) {
+                        is_protein();
+                    } else{
+                        try {
+                            throw new NoValidSeq();
+                        } catch (NoValidSeq e) {
+                            textarea.setText(e.toString());
+                        }
+
+                    }
                 }
             }
             line = inFile.readLine();
         }
         inFile.close();
     }
-        @Override
-        public void actionPerformed (ActionEvent event){
-            File selectedFile;
-            int reply;
-            if (event.getSource() == browse_button) {
-                fileChooser = new JFileChooser();
-                reply = fileChooser.showOpenDialog(this);
-                if (reply == JFileChooser.APPROVE_OPTION) {
-                    selectedFile = fileChooser.getSelectedFile();
-                    textfield.setText(selectedFile.getAbsolutePath());
-                    try {
-                        readFile();
-                    } catch (IOException | NotValidDNA | NotValidAmino | NotValidRNA e) {
-                        textarea.setText(e.toString());
-                    }
+
+    public static void is_dna() {
+        dna = new DNA(textarea.getText());
+        draw();
+    }
+
+    public static void is_rna() {
+        rna = new RNA(textarea.getText());
+        draw();
+    }
+
+    public static void is_protein() {
+        protein = new Protein(textarea.getText());
+        draw();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        File selectedFile;
+        int reply;
+        if (event.getSource() == browse_button) {
+            fileChooser = new JFileChooser();
+            reply = fileChooser.showOpenDialog(this);
+            if (reply == JFileChooser.APPROVE_OPTION) {
+                selectedFile = fileChooser.getSelectedFile();
+                textfield.setText(selectedFile.getAbsolutePath());
+                try {
+                    readFile();
+                } catch (IOException e) {
+                    textarea.setText(e.toString());
                 }
             }
         }
     }
+
+    public static void draw() {
+        Graphics paper = panel.getGraphics();
+        paper.clearRect(20, 500, 740, 240); //clears drawing field
+        float length;
+        Color[] colorArray;
+        if (dna != null) {
+            length = (float) dna.getLength();
+            dna.setColor();
+            colorArray = dna.getColor();
+        } else if (rna != null) {
+            length = (float) rna.getLength();
+            rna.setColor();
+            colorArray = rna.getColor();
+        } else {
+            length = (float) protein.getLength();
+            protein.setColor();
+            colorArray = protein.getColor();
+        }
+        //System.out.println(Arrays.toString(colorArray));
+        int position = 0;
+        int width = Math.round(1f / length * 740); //visualisation might not fit the frame because the round up.
+//        System.out.println(1f / length * 740);
+//        System.out.println(width);
+        for (int i = 0; i < length; i++) {
+            paper.setColor(colorArray[i]);
+            paper.fillRect(position, 0, width, 100);
+            position += width;
+        }
+        dna = null;
+        rna = null;
+        protein = null;
+    }
+}
 
 
 
